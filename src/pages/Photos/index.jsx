@@ -39,10 +39,6 @@ function Photos() {
     const start = page > 1 ? (page - 1) * MAX_PHOTOS_PER_PAGE : 0;
     const end = page > 1 ? page * MAX_PHOTOS_PER_PAGE : 10;
 
-    console.log("start: ", start);
-    console.log("end: ", end);
-    console.log("page: ", page);
-
     return photos
       .slice(start, end)
       .map(({ id, title, thumbnailUrl }) => (
