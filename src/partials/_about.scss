@@ -1,0 +1,17 @@
+.about {
+  background-color: $about-background-color;
+  color: $about-text-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  padding: 7rem 5rem;
+
+  section {
+    margin-top: 2rem;
+    max-width: 80%;
+  }
+}

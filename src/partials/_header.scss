@@ -1,0 +1,27 @@
+header {
+  padding: 10px 30px;
+  background-color: $header-background-color;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+ul.navigation-top {
+  margin: 0;
+
+  li {
+    display: inline;
+    margin-right: 30px;
+
+    a {
+      color: $header-navitem-color;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: $header-navitem-color-focus;
+    }
+  }
+}
