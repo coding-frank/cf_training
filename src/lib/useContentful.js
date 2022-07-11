@@ -20,6 +20,7 @@ function useContentful(paramsObj) {
     ...paramsObj,
   };
 
+  console.log("test: ", process.env.NODE_ENV);
   const getFromContentful = useCallback(async () => {
     setIsLoading(true);
     setIsError(false);
