@@ -8,58 +8,49 @@ import ButtonGroup from "../../components/ButtonGroup";
 const MAX_PHOTOS_PER_PAGE = 10;
 
 function Photos() {
-  const { albumId } = useParams();
+    const { albumId } = useParams();
 
-  const [photos, setPhotos] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalPhotos, setTotalPhotos] = useState(0);
+    const [photos, setPhotos] = useState(null);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [totalPhotos, setTotalPhotos] = useState(0);
 
-  const fetchPhotos = useCallback(async () => {
-    const response = await getPhotos(albumId);
+    const fetchPhotos = useCallback(async () => {
+        const response = await getPhotos(albumId);
 
-    setPhotos(response);
-    setTotalPhotos(response.length);
+        setPhotos(response);
+        setTotalPhotos(response.length);
 
-    // calculate total pages
-    if (response.length > 0) {
-      setTotalPages(Math.ceil(response.length / MAX_PHOTOS_PER_PAGE));
-    }
-  }, []);
+        // calculate total pages
+        if (response.length > 0) {
+            setTotalPages(Math.ceil(response.length / MAX_PHOTOS_PER_PAGE));
+        }
+    }, []);
 
-  useEffect(() => {
-    fetchPhotos();
-  }, []);
+    useEffect(() => {
+        fetchPhotos();
+    }, []);
 
-  if (!setPhotos) return <div>Loading...</div>;
+    if (!setPhotos) return <div>Loading...</div>;
 
-  const EmptyAlbum = () => <p>The album is empty.</p>;
+    const EmptyAlbum = () => <p>The album is empty.</p>;
 
-  const ShowAlbum = () => {
-    const start = page > 1 ? (page - 1) * MAX_PHOTOS_PER_PAGE : 0;
-    const end = page > 1 ? page * MAX_PHOTOS_PER_PAGE : 10;
+    const ShowAlbum = () => {
+        const start = page > 1 ? (page - 1) * MAX_PHOTOS_PER_PAGE : 0;
+        const end = page > 1 ? page * MAX_PHOTOS_PER_PAGE : 10;
 
-    return photos
-      .slice(start, end)
-      .map(({ id, title, thumbnailUrl }) => (
-        <Photo key={id} title={title} url={thumbnailUrl} />
-      ));
-  };
+        return photos.slice(start, end).map(({ id, title, thumbnailUrl }) => <Photo key={id} title={title} url={thumbnailUrl} />);
+    };
 
-  return (
-    <div className="albums">
-      <h2>Photos</h2>
+    return (
+        <div className="albums">
+            <h2>Photos</h2>
 
-      <section>{totalPhotos === 0 ? <EmptyAlbum /> : <ShowAlbum />}</section>
+            <section>{totalPhotos === 0 ? <EmptyAlbum /> : <ShowAlbum />}</section>
 
-      <ButtonGroup
-        page={page}
-        setPage={setPage}
-        totalPages={totalPages}
-        totalPhotos={totalPhotos}
-      />
-    </div>
-  );
+            <ButtonGroup page={page} setPage={setPage} totalPages={totalPages} totalPhotos={totalPhotos} />
+        </div>
+    );
 }
 
 export default Photos;
